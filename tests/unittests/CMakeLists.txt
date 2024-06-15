@@ -16,3 +16,12 @@ target_link_libraries(
     -lcudadevrt
     cal_paddingoffset) 
 
+add_executable(rms_norm
+    test_rmsnorm.cu
+)
+target_link_libraries(
+    rms_norm PUBLIC
+    -lcudart
+    -lcudadevrt
+    rmsnorm)
+

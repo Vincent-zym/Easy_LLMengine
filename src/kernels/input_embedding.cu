@@ -8,7 +8,7 @@ __global__ void embeddingFunctor(const int* input_ids,
                const int max_context_token_num,
                const int hidden_size)
 {
-    // zhaziqwe：得到全局线程id
+    //得到全局线程id
     int index = blockIdx.x * blockDim.x + threadIdx.x;
     // 如果分配的总线程数不够，那么在输出范围内的线程id再来多轮
     while (index < max_context_token_num * hidden_size) {
@@ -27,7 +27,7 @@ void launchInputEmbedding(TensorWrapper<int>* input_ids,    // INT [token num]
                           TensorWrapper<T>* output,       // FP32 [token num, hidden_size] = [token num, 4096]
                           EmbeddingWeight<T>* embed_table// FP32 [vocal_size, hidden_size]
                           ) {
-    // zhaziqwe：分配线程块，核函数需要的维度信息 
+    //分配线程块，核函数需要的维度信息 
     const int blockSize = 256;
     const int max_context_token_num = output->shape[0]; // token num
     const int hidden_size = output->shape[1];
@@ -44,7 +44,7 @@ void launchInputEmbedding(TensorWrapper<int>* input_ids,    // INT [token num]
 #endif
 }
 
-// zhaziqwe: 显式实例化模版函数，由于cuda的语法规则，不能存在.cpp文件里，因此只能在此实例化
+// 显式实例化模版函数，由于cuda的语法规则，不能存在.cpp文件里，因此只能在此实例化
 template void launchInputEmbedding(TensorWrapper<int>* input_ids,    
                                    TensorWrapper<float>* output,       
                                    EmbeddingWeight<float>* embed_table);

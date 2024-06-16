@@ -25,3 +25,12 @@ target_link_libraries(
     -lcudadevrt
     rmsnorm)
 
+add_executable(causalmask
+    test_casual_mask.cu
+)
+target_link_libraries(  # Libs for test_build_casual_mask
+   causalmask PUBLIC
+    -lcudart
+    -lcudadevrt
+    build_casual_mask) 
+

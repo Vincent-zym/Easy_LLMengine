@@ -12,3 +12,8 @@ add_library(rmsnorm STATIC rmsnorm_kernel.cu)
 set_property(TARGET rmsnorm PROPERTY CUDA_SEPARABLE_COMPILATION   ON)
 set_property(TARGET rmsnorm PROPERTY POSITION_INDEPENDENT_CODE  ON)
 set_property(TARGET rmsnorm PROPERTY CUDA_RESOLVE_DEVICE_SYMBOLS  ON)
+
+add_library(build_casual_mask STATIC build_casual_mask.cu)
+set_property(TARGET build_casual_mask PROPERTY CUDA_SEPARABLE_COMPILATION   ON)
+set_property(TARGET build_casual_mask PROPERTY POSITION_INDEPENDENT_CODE  ON)
+set_property(TARGET build_casual_mask PROPERTY CUDA_RESOLVE_DEVICE_SYMBOLS  ON)

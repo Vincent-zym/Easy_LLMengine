@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/testlinear.dir/test_linear.cu.o  -o ../../bin/testlinear   -L/usr/local/cuda/lib64  -L/usr/local/cuda/targets/x86_64-linux/lib/stubs  -L/usr/local/cuda/targets/x86_64-linux/lib  -Wl,-rpath,/usr/local/cuda/lib64 -lcudart -lcudadevrt ../../lib/liblinear.a -lcudart -lcublas ../../lib/libcublasWrapper.a -lcudadevrt -lcudart_static -lrt -lpthread -ldl 

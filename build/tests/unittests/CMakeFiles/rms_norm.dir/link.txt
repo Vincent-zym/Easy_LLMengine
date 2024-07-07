@@ -1,0 +1,1 @@
+/usr/bin/g++  CMakeFiles/rms_norm.dir/test_rmsnorm.cu.o -o ../../bin/rms_norm  -lcudart -lcudadevrt ../../lib/librmsnorm.a  -L"/usr/local/cuda/targets/x86_64-linux/lib/stubs" -L"/usr/local/cuda/targets/x86_64-linux/lib" -lcudadevrt -lcudart_static -lrt -lpthread -ldl

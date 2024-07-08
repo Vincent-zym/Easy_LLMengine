@@ -1,3 +1,0 @@
-/usr/bin/ar qc ../../lib/libcal_paddingoffset.a  CMakeFiles/cal_paddingoffset.dir/cal_paddingoffset.cu.o
-/usr/bin/ar q  ../../lib/libcal_paddingoffset.a  CMakeFiles/cal_paddingoffset.dir/cmake_device_link.o
-/usr/bin/ranlib ../../lib/libcal_paddingoffset.a

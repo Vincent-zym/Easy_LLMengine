@@ -1,3 +1,0 @@
-/usr/bin/ar qc ../../lib/libbuild_casual_mask.a  CMakeFiles/build_casual_mask.dir/build_casual_mask.cu.o
-/usr/bin/ar q  ../../lib/libbuild_casual_mask.a  CMakeFiles/build_casual_mask.dir/cmake_device_link.o
-/usr/bin/ranlib ../../lib/libbuild_casual_mask.a

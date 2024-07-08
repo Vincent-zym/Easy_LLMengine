@@ -1,1 +1,0 @@
-/usr/bin/g++  CMakeFiles/paddingoffset.dir/test_cal_paddingoffset.cu.o -o ../../bin/paddingoffset  -lcudart -lcudadevrt ../../lib/libcal_paddingoffset.a  -L"/usr/local/cuda/targets/x86_64-linux/lib/stubs" -L"/usr/local/cuda/targets/x86_64-linux/lib" -lcudadevrt -lcudart_static -lrt -lpthread -ldl

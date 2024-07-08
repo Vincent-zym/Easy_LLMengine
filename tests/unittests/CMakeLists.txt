@@ -52,3 +52,11 @@ target_link_libraries(  # Libs for test_qkv_bias_and_rope
     -lcudadevrt
     qkv_bias_and_rope)
 
+add_executable(test_concat_kv
+    test_concat_kv.cu
+)
+target_link_libraries(  # Libs for test_qkv_bias_and_rope
+    test_concat_kv PUBLIC
+    -lcudart
+    -lcudadevrt
+    concat_kv) 

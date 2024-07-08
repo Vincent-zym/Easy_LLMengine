@@ -1,3 +1,0 @@
-/usr/bin/ar qc ../../lib/libembeddingFunctor.a  CMakeFiles/embeddingFunctor.dir/input_embedding.cu.o
-/usr/bin/ar q  ../../lib/libembeddingFunctor.a  CMakeFiles/embeddingFunctor.dir/cmake_device_link.o
-/usr/bin/ranlib ../../lib/libembeddingFunctor.a

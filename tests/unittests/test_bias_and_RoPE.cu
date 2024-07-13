@@ -8,7 +8,7 @@
 #include "src/kernels/qkv_bias_and_RoPE.h"
 #include "src/weights/llama/attention_weights.h"
 #include "src/utils/macro.h"
-// (RussWong)note: not sure CPU implementation is absolutely right and the GPU kernel is right compared with HF.
+// (Vincent)note: not sure CPU implementation is absolutely right and the GPU kernel is right compared with HF.
 // when you are implementing LLMs inference on CPU, you can reuse the CPU kernel and test its correctness
 void CPUfunc(float* q,
                 float* k,
@@ -92,7 +92,7 @@ bool CheckResult(float* q, float* k, float* hq, float* hk,
     }
     return true;
 }
-// (RussWong)note:
+// (Vincent)note:
 // `./biasRope` to test fp32 GPU kernel
 // half GPU kernel test is not implemented now
 int main() {

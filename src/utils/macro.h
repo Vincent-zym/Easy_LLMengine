@@ -5,7 +5,7 @@
 #include <cuda.h>
 #include <cuda_runtime.h>
 #include <cublas_v2.h>
-//(RussWong) note: some macro check to assert for helping us find errors, so that we can 
+//(Vincent) note: some macro check to assert for helping us find errors, so that we can 
 // find the bugs faster
 #define CHECK(call)                                   \
 do                                                    \

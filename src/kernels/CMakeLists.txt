@@ -37,3 +37,28 @@ add_library(concat_kv STATIC concat_past_kv.cu)
 set_property(TARGET concat_kv PROPERTY CUDA_SEPARABLE_COMPILATION   ON)
 set_property(TARGET concat_kv PROPERTY POSITION_INDEPENDENT_CODE  ON)
 set_property(TARGET concat_kv PROPERTY CUDA_RESOLVE_DEVICE_SYMBOLS  ON)
+
+add_library(repeat_kv STATIC repeat_kv.cu)
+set_property(TARGET repeat_kv PROPERTY CUDA_SEPARABLE_COMPILATION   ON)
+set_property(TARGET repeat_kv PROPERTY POSITION_INDEPENDENT_CODE  ON)
+set_property(TARGET repeat_kv PROPERTY CUDA_RESOLVE_DEVICE_SYMBOLS  ON)
+
+add_library(mask_softmax STATIC attn_softmax_kernel.cu)
+set_property(TARGET mask_softmax PROPERTY CUDA_SEPARABLE_COMPILATION   ON)
+set_property(TARGET mask_softmax PROPERTY POSITION_INDEPENDENT_CODE  ON)
+set_property(TARGET mask_softmax PROPERTY CUDA_RESOLVE_DEVICE_SYMBOLS  ON)
+
+add_library(fused_transpose_and_remv_pad STATIC fused_transpose_and_remv_pad.cu)
+set_property(TARGET fused_transpose_and_remv_pad PROPERTY CUDA_SEPARABLE_COMPILATION   ON)
+set_property(TARGET fused_transpose_and_remv_pad PROPERTY POSITION_INDEPENDENT_CODE  ON)
+set_property(TARGET fused_transpose_and_remv_pad PROPERTY CUDA_RESOLVE_DEVICE_SYMBOLS  ON)
+
+add_library(fused_addresidual_norm STATIC fused_addresidual_norm.cu)
+set_property(TARGET fused_addresidual_norm PROPERTY CUDA_SEPARABLE_COMPILATION   ON)
+set_property(TARGET fused_addresidual_norm PROPERTY POSITION_INDEPENDENT_CODE  ON)
+set_property(TARGET fused_addresidual_norm PROPERTY CUDA_RESOLVE_DEVICE_SYMBOLS  ON)
+
+add_library(act STATIC act_kernel.cu)
+set_property(TARGET act PROPERTY CUDA_SEPARABLE_COMPILATION   ON)
+set_property(TARGET act PROPERTY POSITION_INDEPENDENT_CODE  ON)
+set_property(TARGET act PROPERTY CUDA_RESOLVE_DEVICE_SYMBOLS  ON)

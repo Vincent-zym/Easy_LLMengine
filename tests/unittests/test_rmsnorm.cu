@@ -9,7 +9,7 @@
 #include "src/kernels/rmsnorm_kernel.h"
 
 #include <stdio.h>
-// (RussWong)note: this kernel's CPU implementation is absolutely right.
+// (Vincent)note: this kernel's CPU implementation is absolutely right.
 // But when you are implementing LLMs inference on CPU, I dont recommend to reuse the CPU kernel, because its performance is bad
 // `./test_residual` to test fp32 GPU kernel
 // `./test_residual 1` to test fp16 GPU kernel

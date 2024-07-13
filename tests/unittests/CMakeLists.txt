@@ -60,3 +60,48 @@ target_link_libraries(  # Libs for test_qkv_bias_and_rope
     -lcudart
     -lcudadevrt
     concat_kv) 
+  
+add_executable(test_repeat_kv
+    test_repeat_kv.cu
+)
+target_link_libraries( 
+    test_repeat_kv PUBLIC
+    -lcudart
+    -lcudadevrt
+    repeat_kv) 
+
+add_executable(test_mask_softmax
+    test_mask_softmax.cu
+)
+target_link_libraries(  
+    test_mask_softmax PUBLIC
+    -lcudart
+    -lcudadevrt
+    mask_softmax) 
+
+add_executable(test_fused_trans_remv_pad
+    test_fused_trans_remv_pad.cu
+)
+target_link_libraries(  
+    test_fused_trans_remv_pad PUBLIC
+    -lcudart
+    -lcudadevrt
+    fused_transpose_and_remv_pad) 
+
+add_executable(test_fused_addresidual_norm
+    test_fused_addresidual_norm.cu
+)
+target_link_libraries(  
+    test_fused_addresidual_norm PUBLIC
+    -lcudart
+    -lcudadevrt
+    fused_addresidual_norm) 
+
+add_executable(test_act
+    test_act.cu
+)
+target_link_libraries(  
+    test_act PUBLIC
+    -lcudart
+    -lcudadevrt
+    act) 

@@ -1,6 +1,6 @@
 #include "cublas_utils.h"
 #include <iostream>
-// (RussWong) notes:cublas gemm和stridedbatchgemm调库的写法，比较固定
+// (Vincent) notes:cublas gemm和stridedbatchgemm调库的写法，比较固定
 cublasWrapper::cublasWrapper(cublasHandle_t cublas_handle,
                                  cublasLtHandle_t cublaslt_handle):
     cublas_handle_(cublas_handle),

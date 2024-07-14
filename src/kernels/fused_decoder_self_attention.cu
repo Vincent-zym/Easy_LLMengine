@@ -254,7 +254,6 @@ __global__ void masked_MHA_kernel(T* q,
     if (tid * vec_size < head_size) {
         // note: above if condition is < head size ,not step, because step by step, we have to use [1, step/seqlen] from logits * [1, head size] from v
         // so here we use acc O to acc the one ele logits * one ele v every step iter
-        // same computation logic with CUDA lesson52 and lesson53
         Vec_t O = scalar_cast_vec<Vec_t, T>(0.0f);
         for(int iter = 0; iter < step; iter++) {
             Vec_t vvec_qkv = *reinterpret_cast<Vec_t*>(&v_cache[iter * step_stride + cache_offset]);

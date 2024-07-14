@@ -114,3 +114,21 @@ target_link_libraries(
     -lcudart
     -lcudadevrt
     fused_decoder_self_attention)
+
+add_executable(test_topk
+    test_topk.cu
+)
+target_link_libraries(  
+    test_topk PUBLIC
+    -lcudart
+    -lcudadevrt
+    topk)
+
+add_executable(test_sampling
+    test_sampling.cu
+)
+target_link_libraries(  
+    test_sampling PUBLIC
+    -lcudart
+    -lcudadevrt
+    sampling) 

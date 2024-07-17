@@ -3,7 +3,7 @@
 // mini-softmax + curand_sample
 // input: [bs, K] from topK output
 // output: [bs]
-// (Russwong)note: beamsearch不存在sampling，所以bsxbm = bs
+// (Vincent)note: beamsearch不存在sampling，所以bsxbm = bs
 template<typename T>
 __global__ void SamplingKernel(int* topk_id,
                                T* topk_val, //[bs, K] from topK

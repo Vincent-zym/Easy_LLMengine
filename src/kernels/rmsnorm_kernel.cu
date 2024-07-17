@@ -18,11 +18,8 @@ __device__ T blockReduceSum(T val){
     int tid = threadIdx.x;
     // warp id
     int wid = tid / 32;
-    // warp内部线程id
     int laneid = tid % 32;
-    // block内warp数量
     int warpnum = (blockDim.x + 31) / 32;
-    // 静态共享内存声明，之所以申请64个，是因为当前最先进GPU的block内线程数量上限为2048，具体也可以根据你所申请的线程数量来调整
     static __shared__ T warpsum[64];
     // warp shuffle完成warp内的reduce sum
     val = warpReduceSum<T>(val);
@@ -45,29 +42,21 @@ __global__ void RMSNorm(T* decoder_out, // [num tokens, q_hidden_units]
                         float eps, //RMSNorm eps
                         int num_tokens, 
                         int hidden_units){
-  // 根据数据类型选择向量大小
   int vec_size = Vec<T>::size;
   using Vec_t = typename Vec<T>::Type;
   float thread_sum = 0.0f;
-  // 输入输出指针向量化
   Vec_t* dout = reinterpret_cast<Vec_t*>(decoder_out + blockIdx.x * hidden_units);
-  // 残差指针的向量化
   Vec_t* rsd;
   rsd = reinterpret_cast<Vec_t*>(decoder_residual + blockIdx.x * hidden_units);
-  // 循环读数据计算
   for (int idx = threadIdx.x; idx < hidden_units / vec_size; idx += blockDim.x) {
-    // 取出idx对应的输入向量写到残差指针指向的显存
     Vec_t vec = dout[idx];
     rsd[idx] = vec;
-    // 向量内部的标量求和
     thread_sum += vec.x * vec.x;
     thread_sum += vec.y * vec.y;
     thread_sum += vec.z * vec.z;
     thread_sum += vec.w * vec.w;
   }
-  // block内的各个向量的标量求和得到block的平方和
   thread_sum = blockReduceSum<float>(thread_sum);
-  // rmsnorm分母的倒数
   __shared__ float inv_mean;
   if (threadIdx.x == 0) {
     inv_mean = rsqrtf((float)thread_sum / hidden_units + eps);
@@ -76,7 +65,6 @@ __global__ void RMSNorm(T* decoder_out, // [num tokens, q_hidden_units]
   // rmsnorm的scale
   Vec_t* s = reinterpret_cast<Vec_t*>(scale);
   for (int idx = threadIdx.x; idx < hidden_units / vec_size; idx += blockDim.x) {
-    // 输入向量
     Vec_t out = dout[idx];// note the offset should divide vec size
     // 等价于output = input * 1 / sqrtf(mean(sigma(x^2)) + eps) * scale
     dout[idx].x = out.x * inv_mean * s[idx].x;

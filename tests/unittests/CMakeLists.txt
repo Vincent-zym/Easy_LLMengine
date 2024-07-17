@@ -132,3 +132,12 @@ target_link_libraries(
     -lcudart
     -lcudadevrt
     sampling) 
+
+add_executable(test_residual
+    test_residual.cu
+)
+target_link_libraries(  
+    test_residual PUBLIC
+    -lcudart
+    -lcudadevrt
+    add_residual) 

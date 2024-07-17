@@ -27,7 +27,6 @@ void launchInputEmbedding(TensorWrapper<int>* input_ids,    // INT [token num]
                           TensorWrapper<T>* output,       // FP32 [token num, hidden_size] = [token num, 4096]
                           EmbeddingWeight<T>* embed_table// FP32 [vocal_size, hidden_size]
                           ) {
-    //分配线程块，核函数需要的维度信息 
     const int blockSize = 256;
     const int max_context_token_num = output->shape[0]; // token num
     const int hidden_size = output->shape[1];

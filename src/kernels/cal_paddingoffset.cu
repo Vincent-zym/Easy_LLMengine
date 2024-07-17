@@ -21,29 +21,20 @@ __global__ void CalPaddingoffset(int*         padding_offset,
     int ind = 0;
     int cum_offset = 0;
     int total_seqlen = 0;
-    // 遍历每一个批次
     for(int b = 0; b < batch_size; b++) {
-        // 获取到每个句子的长度
         int seqlen = input_lengths[b];
-        // 累计的句子长度
         cum_seqlens[b] = total_seqlen;
-        // 遍历一个句子里的所有token位置
         // each token in one seq has same cum offset
         for (int i = 0; i < seqlen; i++) {
-            // index是对于每个token的索引，每个token都有一个paddingoffset
             padding_offset[ind] = cum_offset;
             ind++;
         }
-        // 获取累计的 padding offset 和 总共的句子长度
         cum_offset += max_q_len - seqlen;
         total_seqlen += seqlen;
     }
-    // 注意 cum_seqlens 的形状，添加最后一个累计句子长度（总长度）
     cum_seqlens[batch_size] = total_seqlen;
 }
 
-// 这个函数的目的是为了在attention之后，可以方便的移除padding。
-// padding操作和 seq len 维度相关，因此相关操作需要在不涉及这一维度的计算后添加。  
 void launchCalPaddingoffset(TensorWrapper<int>* padding_offset, 
                             TensorWrapper<int>* cum_seqlens,
                             TensorWrapper<int>* input_lengths)//actual input lens

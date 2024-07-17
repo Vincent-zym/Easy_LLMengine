@@ -77,3 +77,8 @@ add_library(sampling STATIC sampling.cu)
 set_property(TARGET sampling PROPERTY CUDA_SEPARABLE_COMPILATION   ON)
 set_property(TARGET sampling PROPERTY POSITION_INDEPENDENT_CODE  ON)
 set_property(TARGET sampling PROPERTY CUDA_RESOLVE_DEVICE_SYMBOLS  ON)
+
+add_library(add_residual STATIC add_residual.cu)
+set_property(TARGET add_residual PROPERTY CUDA_SEPARABLE_COMPILATION   ON)
+set_property(TARGET add_residual PROPERTY POSITION_INDEPENDENT_CODE  ON)
+set_property(TARGET add_residual PROPERTY CUDA_RESOLVE_DEVICE_SYMBOLS  ON)

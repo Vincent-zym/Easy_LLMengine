@@ -75,7 +75,6 @@ __global__ void ScaleMaskAndSoftmax_float(T *attn_score,
         T qk_data = static_cast<T>(0);
         T mask_data = static_cast<T>(0);
         T thread_max = FLT_MIN;
-        // (Vincent)note: 面对这种一个block一个thread需要处理多行多列的时候，数据尽量用数组存储，计算出每个block和thread要处理几行几列
         T data[NUMS_PER_THREAD_PER_ROW]; 
         for (int col_start = 0; col_start < NUMS_PER_THREAD_PER_ROW; col_start++)
         {
@@ -161,7 +160,7 @@ __global__ void ScaleMaskAndSoftmax_half(T_half *attn_score,
         Vec_t qk_data;
         Vec_t mask_data;
         float thread_max = FLT_MIN;
-        Vec_t data[NUMS_PER_THREAD_PER_ROW]; // 面对这种一个block一个thread需要处理多行多列的时候，数据尽量用数组存储，计算出每个block和thread要处理几行几列
+        Vec_t data[NUMS_PER_THREAD_PER_ROW]; 
         // for(int col_start = threadIdx.x; col_start < k_len; col_start += blockDim.x){
         for (int col_start = 0; col_start < NUMS_PER_THREAD_PER_ROW; col_start++)
         {

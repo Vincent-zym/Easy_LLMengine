@@ -2,7 +2,6 @@
 #include "src/utils/macro.h"
 #include "src/utils/debug_utils.h"
 #include "src/layers/attention/context_attention.h"
-//(RussWong) note: layers文件夹下，很多操作后面我都加了`DeviceSyncAndCheckCudaError();`，大家可手动删除或者按照lesson30所示添加条件编译代码
 template<typename T>
 LLaMAContextAttentionLayer<T>::LLaMAContextAttentionLayer(
                                int head_num,
@@ -72,7 +71,7 @@ void LLaMAContextAttentionLayer<T>::freeBuf(){
     DeviceSyncAndCheckCudaError();
     allocator->Free(k_cache_buf->data);
     DeviceSyncAndCheckCudaError();
-    // (RussWong) note: no need to free v cache buf, because its included in k cache buf->data
+    // (Vincent) note: no need to free v cache buf, because its included in k cache buf->data
 //    allocator->Free(v_cache_buf->data); 
 //    DeviceSyncAndCheckCudaError();
     allocator->Free(qk_buf->data);
@@ -81,11 +80,11 @@ void LLaMAContextAttentionLayer<T>::freeBuf(){
     DeviceSyncAndCheckCudaError();
     allocator->Free(qkv_buf_wo_pad_1->data);
 }
-// (RussWong) note: params order of launcher function in LaMAContextAttentionLayer<T>::forward: (input[Tensor], input[Tensor],...,weight[Weight], output[*])
+// (Vincent) note: params order of launcher function in LaMAContextAttentionLayer<T>::forward: (input[Tensor], input[Tensor],...,weight[Weight], output[*])
 template<typename T>
 void LLaMAContextAttentionLayer<T>::forward(TensorMap& inputs, TensorMap& outputs, LLaMAattentionWeights<T>& weights, LLaMAAttentionDynParams& params, LLaMAAttentionStaticParams& static_params)
 {   
-    // RussWong) note: allocate intermediat buf of the layer forward
+    // Vincent) note: allocate intermediat buf of the layer forward
     allocForForward(params);
     //1.qkv linear
     //shape:[num_tokens, qhiddenunits] * [qhiddenunits, hiddenunits]
@@ -94,7 +93,7 @@ void LLaMAContextAttentionLayer<T>::forward(TensorMap& inputs, TensorMap& output
     DeviceSyncAndCheckCudaError();
     //2.qkv bias and rope and padding
     //shape:[num_tokens, hiddenunits]=>{batch_size, q(kv)head_num, max_q_len, head_size}
-    //(RussWong) note: qkv bias is not existed in llama
+    //(Vincent) note: qkv bias is not existed in llama
     Tensor* padding_offset = inputs["padding_offset"];
     Tensor* history_length = inputs["history_length"];
     Tensor* input_length = inputs["input_length"];

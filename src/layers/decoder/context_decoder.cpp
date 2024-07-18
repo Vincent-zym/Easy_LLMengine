@@ -2,8 +2,7 @@
 #include "src/utils/macro.h"
 #include "src/utils/debug_utils.h"
 #include "src/layers/decoder/context_decoder.h"
-// (RussWong)note: in llama, all linear dont have bias
-// (RussWong) note: layers文件夹下，很多操作后面我都加了`DeviceSyncAndCheckCudaError();`，大家可手动删除或者按照lesson30所示添加条件编译代码
+// (Vincent)note: in llama, all linear dont have bias
 template<typename T>
 void LlamaContextDecoder<T>::allocForForward(LLaMAAttentionDynParams& params)
 {

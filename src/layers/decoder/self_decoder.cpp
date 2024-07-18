@@ -1,7 +1,6 @@
 #include <iostream>
 #include "src/utils/macro.h"
 #include "src/layers/decoder/self_decoder.h"
-//(RussWong) note: layers文件夹下，很多操作后面我都加了`DeviceSyncAndCheckCudaError();`，大家可手动删除或者按照lesson30所示添加条件编译代码
 template<typename T>
 void LlamaSelfDecoder<T>::allocForForward(LLaMAAttentionDynParams& params)
 {

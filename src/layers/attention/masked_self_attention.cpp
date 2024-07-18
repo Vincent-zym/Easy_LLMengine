@@ -1,7 +1,6 @@
 #include <math.h>
 #include "src/utils/debug_utils.h"
 #include "src/layers/attention/masked_self_attention.h"
-//(RussWong) note: layers文件夹下，很多操作后面我都加了`DeviceSyncAndCheckCudaError();`，大家可手动删除或者按照lesson30所示添加条件编译代码
 template<typename T>
 LLaMASelfAttentionLayer<T>::LLaMASelfAttentionLayer(
                                int head_num,
@@ -31,7 +30,7 @@ void LLaMASelfAttentionLayer<T>::allocForForward(LLaMAAttentionDynParams& params
     int max_k_len = params.max_k_len;
     DataType type = getTensorType<T>(); 
     const int qkv_head_num = head_num + 2 * kv_head_num;
-    // (RussWong) note: 当前step的q k v的shape里面step或seqlen都是1，之前step的kv在做gemv的时候直接从kv cache拿
+    // (Vincent) note: 当前step的q k v的shape里面step或seqlen都是1，之前step的kv在做gemv的时候直接从kv cache拿
     qkv_buf = new TensorWrapper<T>(Device::GPU, type, {batch_size, qkv_head_num, head_size}); 
     mha_output = new TensorWrapper<T>(Device::GPU, type, {batch_size, hidden_units});
     
@@ -46,11 +45,11 @@ void LLaMASelfAttentionLayer<T>::freeBuf(){
     allocator->Free(mha_output->data);
     DeviceSyncAndCheckCudaError();
 }
-// (RussWong) note: params order of launcher function in LaMAContextAttentionLayer<T>::forward: (input[Tensor], input[Tensor],...,weight[Weight], output[*])
+// (Vincent) note: params order of launcher function in LaMAContextAttentionLayer<T>::forward: (input[Tensor], input[Tensor],...,weight[Weight], output[*])
 template<typename T>
 void LLaMASelfAttentionLayer<T>::forward(TensorMap& inputs, TensorMap& outputs, LLaMAattentionWeights<T>& weights, LLaMAAttentionDynParams& params)
 {   
-    // (RussWong) note: allocate intermediate buf of the layer forward
+    // (Vincent) note: allocate intermediate buf of the layer forward
     allocForForward(params);
     //1. qkv linear
     //shape:[bs,1,q_hidden_units] * [q_hidden_units, hidden_units] = [bs,1,hidden_units]

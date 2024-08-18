@@ -11,7 +11,8 @@ pip install torch
 ```
 ## Quick Start
 ```
-cd LLMengine
+git clone https://github.com/Vincent-zym/Easy_LLMengine.git
+cd Easy_LLMengine
 mkdir build
 cd build
 cmake .. && make -j8
